@@ -1,0 +1,24 @@
+{
+  "functions": {
+    "api/log.js": {
+      "runtime": "nodejs18.x"
+    },
+    "api/getlog.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/log",
+      "destination": "/api/log.js"
+    },
+    {
+      "source": "/api/getlog",
+      "destination": "/api/getlog.js"
+    },
+    {
+      "source": "/",
+      "destination": "/api/getlog"
+    }
+  ]
+}

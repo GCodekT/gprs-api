@@ -2,7 +2,6 @@
   "name": "gprs-api",
   "version": "1.0.0",
   "description": "SIM800L → Vercel API",
-  "main": "api/log.js",
   "keywords": ["sim800l", "gprs", "arduino"],
   "author": "Pavel",
   "license": "ISC",
