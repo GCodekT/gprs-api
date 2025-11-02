@@ -10,13 +10,17 @@ module.exports = function (req, res) {
   const value = req.query.a || 'NO DATA';
   const timestamp = new Date().toISOString();
 
-  const logPath = path.join(__dirname, 'data', 'log.json');
+  // Путь в /tmp — РАЗРЕШЕНО
+  const logPath = '/tmp/log.json';
 
   let logs = [];
   if (fs.existsSync(logPath)) {
     try {
       logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
-    } catch (e) { logs = []; }
+    } catch (e) {
+      console.error('Parse error:', e);
+      logs = [];
+    }
   }
 
   logs.push({ timestamp, value });
@@ -25,6 +29,7 @@ module.exports = function (req, res) {
   try {
     fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
   } catch (e) {
+    console.error('Write error:', e);
     return res.status(500).json({ error: 'Save failed' });
   }
 
